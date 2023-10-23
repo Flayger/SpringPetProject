@@ -52,14 +52,16 @@ public class SecurityConfig {
                 authorizeHttpRequests(req ->
                 req
                         .requestMatchers("/admin").hasRole("ADMIN")
-                        .requestMatchers("/hello").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/users/hello").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/login", "/error", "/registration").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form.loginPage("/login")
                         .loginProcessingUrl("/process_login")
                         .defaultSuccessUrl("/hello", true)
                         .failureUrl("/login?error"))
-                .logout((logout) -> logout.logoutUrl("/logout").logoutSuccessUrl("/login"));
+                .logout((logout) -> logout.logoutUrl("/logout").logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true));
+
         return http.build();
     }
 

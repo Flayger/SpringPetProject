@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать место</title>
+</head>
+<body>
+
+
+<form th:object="${realmProperty}" th:method="PATCH" th:action="@{/realmProperties/{id}(id=${realmProperty.getId()})}" >
+
+    <label for="name"> Название места</label>
+    <input id="name" th:field="*{name}"  type="text">
+    <div th:if="${#fields.hasErrors('name')}" style="color: red" th:errors="*{name}">name error</div>
+<br/>
+    <label for="size"> Размер места</label>
+    <input id="size" th:field="*{size}"  type="text">
+    <div th:if="${#fields.hasErrors('size')}" style="color: red" th:errors="*{size}">size error</div>
+    <br/>
+    <label for="number_of_bathrooms"> Количество туалетов места</label>
+    <input id="number_of_bathrooms" th:field="*{number_of_bathrooms}"  type="text">
+    <div th:if="${#fields.hasErrors('number_of_bathrooms')}" style="color: red" th:errors="*{number_of_bathrooms}">number_of_bathrooms error</div>
+    <br/>
+    <label for="number_of_bedrooms"> Количество спальных места</label>
+    <input id="number_of_bedrooms" th:field="*{number_of_bedrooms}"  type="text">
+    <div th:if="${#fields.hasErrors('number_of_bedrooms')}" style="color: red" th:errors="*{number_of_bedrooms}">number_of_bedrooms error</div>
+<br/>
+    <label for="price"> Цена</label>
+    <input id="price" th:field="*{price}"  type="text">
+    <div th:if="${#fields.hasErrors('price')}" style="color: red" th:errors="*{price}">price error</div>
+    <br/>
+
+    <input type="submit" value="Изменить место"/>
+</form>
+
+<label for="owner">Владелец </label>
+<p id="owner" th:text="*{realmProperty.getOwner_id().getUsername()}">Владелец </p>
+
+<br/>
+<a th:href="@{/realmProperties/show}"> Список всей недвижимости </a>
+
+<br/>
+
+<form th:method="DELETE" th:action="@{/realmProperties/{id}/delete(id=${realmProperty.getId()})}">
+    <input type="submit" value="Удалить недвижимость"/>
+</form>
+
+<br/>
+
+<br/>
+<a th:href="@{/users/showUserInfo}"> Мой профиль</a>
+<br/>
+<form th:method="POST" th:action="@{/logout}">
+    <input type="submit" value="Выйти из профиля"/>
+</form>
+
+
+</body>
+</html>

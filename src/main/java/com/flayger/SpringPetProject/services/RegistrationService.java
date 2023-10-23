@@ -7,7 +7,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
+@Transactional(readOnly = true)
 public class RegistrationService {
 
     private final PeopleRepository peopleRepository;
@@ -22,6 +25,7 @@ public class RegistrationService {
     @Transactional
     public void register(Person person){
         person.setPassword(passwordEncoder.encode(person.getPassword()));
+        person.setCreatedAt(LocalDateTime.now());
         person.setRole("ROLE_USER");
         peopleRepository.save(person);
     }

@@ -6,8 +6,11 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Entity
-@Table(name = "users")
+@Table(name = "person")
 @Component
 public class Person {
 
@@ -21,26 +24,62 @@ public class Person {
     @Column(name = "username")
     private String username;
 
-    @NotEmpty(message = "password shouldn't be empty")
     @Column(name = "password")
     private String password;
 
-    @Min(value = 1900, message = "year shouldn't be below 1900")
-    @Column(name = "year")
-    private int year;
-
     @Column(name = "role")
     private String role;
+
+    @OneToMany(mappedBy = "owner_id")
+    private List<RealmProperty> realmPropertyList;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     public String getRole() {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public Person() {
     }
 
-    public Person() {
+    public List<RealmProperty> getRealmPropertyList() {
+        return realmPropertyList;
+    }
+
+    public void setRealmPropertyList(List<RealmProperty> realmPropertyList) {
+        this.realmPropertyList = realmPropertyList;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public List<RealmProperty> getPropertyList() {
+        return realmPropertyList;
+    }
+
+    public void setPropertyList(List<RealmProperty> realmPropertyList) {
+        this.realmPropertyList = realmPropertyList;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public int getId() {
@@ -67,11 +106,4 @@ public class Person {
         this.password = password;
     }
 
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
 }

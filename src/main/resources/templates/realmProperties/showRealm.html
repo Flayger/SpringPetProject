@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница недвижимости</title>
+</head>
+<body>
+
+<div>
+    <label for="name">Название места </label>
+    <p id="name" th:text="${realmProperty.getName()}"> VALUE </p>
+    <label for="size">Размер места </label>
+    <p id="size" th:text="${realmProperty.getSize()}"> VALUE </p>
+    <label for="number_of_bathrooms">Количество туалетов места </label>
+    <p id="number_of_bathrooms" th:text="${realmProperty.getNumber_of_bathrooms()}"> VALUE </p>
+    <label for="Number_of_bedrooms">Количество спален места </label>
+    <p id="number_of_bedrooms" th:text="${realmProperty.getNumber_of_bedrooms()}"> VALUE </p>
+    <label for="owner">Владелец места </label>
+    <a id="owner" th:href="@{/users/{id}(id=${realmProperty.getOwner_id().getId()})}" th:text="${realmProperty.getOwner_id().getUsername()}"> VALUE </a>
+    <label for="location">Локация места </label>
+    <p id="location" th:text="${realmProperty.getLocation()}"> VALUE </p>
+    <label for="price">Цена места </label>
+    <p id="price" th:text="${realmProperty.getPrice()}"> VALUE </p>
+</div>
+
+
+<br/>
+<a th:href="@{/realmProperties/{id}/edit(id=${realmProperty.getId()})}"> Редактировать недвижимость </a>
+
+<br/>
+
+<a th:href="@{/realmProperties/show}"> Список всей недвижимости </a>
+
+<br/>
+<a th:href="@{/users/showUserInfo}"> Мой профиль</a>
+<br/>
+<form th:method="POST" th:action="@{/logout}">
+    <input type="submit" value="Выйти из профиля"/>
+</form>
+
+
+</body>
+</html>

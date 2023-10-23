@@ -1,7 +1,7 @@
 package com.flayger.SpringPetProject.util;
 
 import com.flayger.SpringPetProject.models.Person;
-import com.flayger.SpringPetProject.services.PersonService;
+import com.flayger.SpringPetProject.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -12,11 +12,11 @@ import java.util.Optional;
 @Component
 public class PersonValidator implements Validator {
 
-    private final PersonService personService;
+    private final PeopleService peopleService;
 
     @Autowired
-    public PersonValidator(PersonService personService) {
-        this.personService = personService;
+    public PersonValidator(PeopleService peopleService) {
+        this.peopleService = peopleService;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Person testPerson = (Person) target;
-        Optional<Person> dbPerson = personService.findByUsername(testPerson.getUsername());
+        Optional<Person> dbPerson = peopleService.findByUsername(testPerson.getUsername());
         if(dbPerson.isPresent()){
             if(dbPerson.get().getId() == (testPerson.getId())){
                 return;

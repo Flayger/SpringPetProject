@@ -17,12 +17,11 @@
     <input id="password" th:field="*{password}" type="password"/>
     <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     <br/>
-    <label for="year"> Год рождения </label>
-    <input id="year" th:field="*{year}" type="number"/>
-    <div style="color: red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></div>
-    <br/>
-    <input type="submit" value="Создать нового пользователя"/>
+    <input type="submit" value="Зарегистрироваться"/>
 
 </form>
+
+<div>Уже есть профиль? <a href="/login">Войти</a> </div>
+
 </body>
 </html>

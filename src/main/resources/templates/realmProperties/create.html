@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать новое место</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/realmProperties/save}" th:object="${realmProperty}">
+
+    <label for="name"> Название недвижимости </label>
+    <input id="name" th:field="*{name}" type="text"/>
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    <br/>
+    <label for="size"> Размер </label>
+    <input id="size" th:field="*{size}" type="number"/>
+    <div style="color: red" th:if="${#fields.hasErrors('size')}" th:errors="*{size}"></div>
+    <br/>
+    <label for="price"> Цена </label>
+    <input id="price" th:field="*{price}" type="number"/>
+    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+    <br/>
+
+    <input type="submit" value="Добавить недвижимость"/>
+
+</form>
+
+<br/>
+
+<a th:href="@{/realmProperties/show}"> Список всей недвижимости </a>
+
+<br/>
+
+<br/>
+<a th:href="@{/users/showUserInfo}"> Мой профиль</a>
+<br/>
+<form th:method="POST" th:action="@{/logout}">
+    <input type="submit" value="Выйти из профиля"/>
+</form>
+
+</body>
+</html>

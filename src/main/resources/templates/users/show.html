@@ -2,19 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Показать всех пользователей?</title>
 </head>
 <body>
 
-<!-- csrf token -->
-<form th:method="POST" th:action="@{/logout}">
-    <input type="submit" value="Выйти из профиля"/>
-</form>
+<div th:each="person : ${userList}">
+    <a th:href="@{/users/{id}(id=${person.getId()})}" th:text="${person.getUsername()}"> User</a>
+</div>
 
-<a th:href="@{/users/show}"> Показать всех пользователей</a>
-
-<br/>
-<a th:href="@{/realmProperties/new}"> Добавить новую недвижимость</a>
 
 <br/>
 <a th:href="@{/realmProperties/show}"> Список всей недвижимости </a>
@@ -25,5 +20,6 @@
 <form th:method="POST" th:action="@{/logout}">
     <input type="submit" value="Выйти из профиля"/>
 </form>
+
 </body>
 </html>

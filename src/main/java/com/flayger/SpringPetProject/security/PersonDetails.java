@@ -52,4 +52,6 @@ public class PersonDetails implements org.springframework.security.core.userdeta
     public boolean isEnabled() {
         return true;
     }
+
+    public Person getPerson(){ return this.person;}
 }

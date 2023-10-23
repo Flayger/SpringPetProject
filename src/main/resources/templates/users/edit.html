@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать пользователя</title>
+</head>
+<body>
+
+<form th:object="${user}" th:method="PATCH" th:action="@{/users/{id}(id=${user.getId()})}" >
+
+    <label for="username"> Имя пользователя </label>
+    <input id="username" th:field="*{username}"  type="text">
+    <div th:if="${#fields.hasErrors('username')}" style="color: red" th:errors="*{username}">username error</div>
+
+    <input type="submit" value="Изменить пользователя"/>
+</form>
+
+<br/>
+
+<form th:method="DELETE" th:action="@{/users/{id}/delete(id=${user.getId()})}">
+    <input type="submit" value="Удалить пользователя"/>
+</form>
+
+<br/>
+
+<br/>
+
+<a th:href="@{/users/show}"> Назад к списку людей </a>
+<br/>
+
+<a th:href="@{/users/showUserInfo}"> Мой профиль</a>
+<br/>
+<form th:method="POST" th:action="@{/logout}">
+    <input type="submit" value="Выйти из профиля"/>
+</form>
+
+</body>
+</html>

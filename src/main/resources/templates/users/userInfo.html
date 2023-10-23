@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница пользователя</title>
+</head>
+<body>
+
+<div>
+    <label for="username">Имя пользователя </label>
+    <p id="username" th:text="${user.getUsername()}"> VALUE </p>
+    <label for="role">Роль пользователя</label>
+    <p id="role" th:text="${user.getRole()}"> VALUE </p>
+
+    <div th:each="realmProperty : ${user.getPropertyList()}">
+        <a th:href="@{/realmProperties/{id}(id=${realmProperty.getId()})}"
+           th:text="${realmProperty.getName() +',' }">property</a>
+        <a th:href="@{/users/{id}(id=${realmProperty.getOwner_id().getId()})}"
+           th:text="' владелец ' + ${realmProperty.getOwner_id().getUsername()}">owner</a>
+    </div>
+
+</div>
+<a th:href="@{/users/edit}"> Редактировать пользователя </a>
+
+<form th:method="POST" th:action="@{/logout}">
+    <input type="submit" value="Выйти из профиля"/>
+</form>
+</body>
+</html>
