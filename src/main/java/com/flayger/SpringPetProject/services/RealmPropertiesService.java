@@ -13,12 +13,10 @@ public class RealmPropertiesService {
 
     private final RealmPropertiesRepository realmPropertiesRepository;
 
-
     @Autowired
     public RealmPropertiesService(RealmPropertiesRepository realmPropertiesRepository) {
         this.realmPropertiesRepository = realmPropertiesRepository;
     }
-
 
     public void save(RealmProperty realmProperty) {
         realmPropertiesRepository.save(realmProperty);
@@ -31,7 +29,7 @@ public class RealmPropertiesService {
     public void update(RealmProperty realmProperty) {
         Optional<RealmProperty> dbProperty = realmPropertiesRepository.findById(realmProperty.getId());
         if(dbProperty.isPresent()){
-            dbProperty.get().setLocation(realmProperty.getLocation());
+            //dbProperty.get().setLocation(realmProperty.getLocation());
             dbProperty.get().setName(realmProperty.getName());
             dbProperty.get().setIs_closed(realmProperty.isIs_closed());
             dbProperty.get().setPrice(realmProperty.getPrice());

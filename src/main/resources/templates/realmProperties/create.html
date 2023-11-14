@@ -3,8 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Создать новое место</title>
+
+
+    <script th:src="@{'https://api-maps.yandex.ru/v3/'+'?apikey='+${@environment.getProperty('yandex.map.api.key')}+'&lang=ru_RU'}"></script>
+    <script type="text/javascript">
+        initMap();
+        import * as ymaps3 from 'ymaps3';
+        async function initMap() {
+            await ymaps3.ready;
+
+            const {YMap, YMapDefaultSchemeLayer} = ymaps3;
+
+            const map = new YMap(
+                document.getElementById('map'),
+                {
+                    location: {
+                        center: [37.588144, 55.733842],
+                        zoom: 10
+                    }
+                }
+            );
+
+            map.addChild(new YMapDefaultSchemeLayer());
+        }
+    </script>
 </head>
+
+
 <body>
+
+<div id="map" style="width: 600px; height: 400px"></div>
+
 
 <form th:method="POST" th:action="@{/realmProperties/save}" th:object="${realmProperty}">
 

@@ -20,7 +20,9 @@ public class RealmProperty {
     private int price;
 
     //@NotEmpty(message = "property location should not be empty")
-    private String location;
+    private String locationX;
+
+    private String locationY;
     //google maps?
 
     @Min(0)
@@ -72,12 +74,20 @@ public class RealmProperty {
         this.price = price;
     }
 
-    public String getLocation() {
-        return location;
+    public String getLocationX() {
+        return locationX;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLocationX(String locationX) {
+        this.locationX = locationX;
+    }
+
+    public String getLocationY() {
+        return locationY;
+    }
+
+    public void setLocationY(String locationY) {
+        this.locationY = locationY;
     }
 
     public int getSize() {

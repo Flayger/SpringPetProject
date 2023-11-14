@@ -1,10 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Страница недвижимости</title>
+
+
+<!--    ${@environment.getProperty('google.map.key')}-->
+    <script th:src="@{'https://api-maps.yandex.ru/v3/'+'?apikey='+${@environment.getProperty('yandex.map.api.key')}+'&lang=ru_RU'}"></script>
+    <script type="text/javascript">
+        initMap();
+
+        async function initMap() {
+            await ymaps3.ready;
+
+            const {YMap, YMapDefaultSchemeLayer} = ymaps3;
+
+             const locationX = [[${realmProperty.getLocationX()}]];
+             const locationY = [[${realmProperty.getLocationY()}]];
+
+            const map = new YMap(
+                document.getElementById('map'),
+                {
+                    location: {
+                        center: [locationX, locationY],
+                        zoom: 10
+                    }
+                }
+            );
+
+            map.addChild(new YMapDefaultSchemeLayer());
+        }
+    </script>
 </head>
+
+
 <body>
+
+
+<div id="map" style="width: 600px; height: 400px"></div>
+
+<!--<div>-->
+<!--    <input type="text" placeholder="0.0.0.0" id="w-input-search" value="">-->
+<!--    <span>-->
+<!--		<button id="w-button-search" type="button">Search</button>-->
+<!--	</span>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+
+<!--        $("#w-button-search").click(function () {-->
+
+<!--            $.getJSON("${pageContext.request.contextPath}/getLocationByIpAddress",-->
+<!--                {-->
+<!--                    ipAddress: $('#w-input-search').val()-->
+<!--                },-->
+<!--                function (data) {-->
+
+<!--                    var data = JSON.stringify(data);-->
+<!--                    var json = JSON.parse(data);-->
+
+<!--                    showMap(json["latitude"], json["longitude"])-->
+
+<!--                    $("#result").html(data)-->
+
+<!--                })-->
+<!--                .done(function () {-->
+<!--                })-->
+<!--                .fail(function () {-->
+<!--                })-->
+<!--                .complete(function () {-->
+<!--                });-->
+
+<!--        });-->
+<!--    }-->
+<!--</script>-->
+<!--<br/>-->
+<!--<div id="result"></div>-->
+<!--<br/>-->
+<!--<div style="width:600px;height:400px" id="map"></div>-->
+
+
+<!--<button type="button" th:onclick="showAlert()">Show Alert</button>-->
+
+<!--<button onClick="showInfos()">Show Infos</button>-->
+
 
 <div>
     <label for="name">Название места </label>
@@ -17,10 +97,15 @@
     <p id="number_of_bedrooms" th:text="${realmProperty.getNumber_of_bedrooms()}"> VALUE </p>
     <label for="owner">Владелец места </label>
     <a id="owner" th:href="@{/users/{id}(id=${realmProperty.getOwner_id().getId()})}" th:text="${realmProperty.getOwner_id().getUsername()}"> VALUE </a>
-    <label for="location">Локация места </label>
-    <p id="location" th:text="${realmProperty.getLocation()}"> VALUE </p>
+<!--    <label for="location">Локация места </label>-->
+<!--    <p id="location" th:text="${realmProperty.getLocation()}"> VALUE </p>-->
     <label for="price">Цена места </label>
     <p id="price" th:text="${realmProperty.getPrice()}"> VALUE </p>
+    <label for="locationX">Локация X места </label>
+    <p id="locationX" th:text="${realmProperty.getLocationX()}"> VALUE </p>
+
+    <label for="locationY">Локация Y места </label>
+    <p id="locationY" th:text="${realmProperty.getLocationY()}"> VALUE </p>
 </div>
 
 
